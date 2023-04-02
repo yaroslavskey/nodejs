@@ -1,0 +1,44 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+// model TypeAircraft {
+//   id Int @default(autoincrement()) @id
+//   count String? 
+//   code String?  @unique
+//   aircraftType String?  @unique
+//   bort Borts[]
+// }
+
+// model Borts {
+//   id        Int      @default(autoincrement()) @id
+//   ident   String? 
+//   type    TypeAircraft?    @relation(fields: [bortsId], references: [id])
+//   origin String? 
+//   destination String 
+//   departure String 
+//   estimatedArrivalTime String? 
+//   estimatedTimeEnroute String? 
+//   bortsId Int
+// }
+
+model Borts {
+  id        Int      @default(autoincrement()) @id
+  date    String? 
+  ident   String? 
+  type    String?
+  origin String? 
+  destination String? 
+  departure String? 
+  estimatedArrivalTime String? 
+  estimatedTimeEnroute String? 
+}
