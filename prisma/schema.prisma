@@ -33,7 +33,8 @@ datasource db {
 
 model Borts {
   id        Int      @default(autoincrement()) @id
-  date    String? 
+  //createdAt  DateTime @default(now()) @db.Date
+  createdAt  DateTime @default(now()) @db.Timestamptz()
   ident   String? 
   type    String?
   origin String? 
@@ -41,4 +42,6 @@ model Borts {
   departure String? 
   estimatedArrivalTime String? 
   estimatedTimeEnroute String? 
+
+  @@index([origin, destination, createdAt(sort: Desc)])
 }

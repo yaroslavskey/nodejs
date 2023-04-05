@@ -4,7 +4,26 @@ import { getPageContent } from './helpers/puppeteer.js';
 import { removeAircraftTypeWithKeywords } from './helpers/helpers.js';
 import { parseBorts } from './helpers/parser.js';
 
+import { getDataByDateRange, getDataByDateRangeOrigin, countOriginsByDateRange } from './helpers/reports.js';
+
 (async () => {
+
+  const origin = "Melbourne Orlando Intl (KMLB)";
+  const destination = "Daytona Beach Intl (KDAB)";
+  
+  const startDate = new Date('2023-04-01T00:00:00.000Z')
+  const endDate = new Date('2023-04-31T23:59:59.999Z')
+
+  const result1 = await countOriginsByDateRange(startDate, endDate)
+
+  //const result1 = await getDataByDateRangeOrigin(origin, startDate, endDate)
+
+  //const result1 = await getDataByDateRange(origin, destination, startDate, endDate)
+  console.log(result1)
+
+
+
+
   const selector = ['smallrow1', 'smallrow2'];
   const SITE = 'https://flightaware.com/live/aircrafttype';
   const url = `${SITE}`;

@@ -2,7 +2,7 @@ import * as cheerio from 'cheerio';
 import chalk from 'chalk';
 import { getPageContent } from './puppeteer.js';
 import { copyArrayObjects, filterObjects } from './helpers.js';
-import { writeToDatabase, createManyRecords, sortByMatchCount } from './data_handler.js';
+import { writeToDatabase } from './data_handler.js';
 
 export const finalarrays = [];
 
@@ -36,7 +36,6 @@ export async function parseBorts(bort) {
         const obj = copyArrayObjects(items);
       }
         const subarraySort = filterObjects(finalarrays);
-        //await sortByMatchCount();
 
 
       if (subarraySort.length === 0) {
