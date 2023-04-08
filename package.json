@@ -13,7 +13,9 @@
     "@prisma/client": "^4.11.0",
     "chalk": "^5.2.0",
     "cheerio": "^1.0.0-rc.12",
+    "date-fns": "^2.29.3",
     "fs": "^0.0.1-security",
+    "moment": "^2.29.4",
     "prettier": "^2.8.7",
     "puppeteer": "^19.7.5",
     "transliteration": "^2.3.5"

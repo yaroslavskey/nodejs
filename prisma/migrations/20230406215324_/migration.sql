@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Borts" ALTER COLUMN "ident" SET DATA TYPE TEXT;

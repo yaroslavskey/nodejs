@@ -63,7 +63,7 @@ const prisma = new PrismaClient();
 
   export async function countOriginsByDateRange(startDate, endDate) {
     const data = await prisma.borts.groupBy({
-      by: ['origin', 'destination'],
+      by: ['origin', 'destination', 'type'],
       where: {
         createdAt: {
           gte: startDate,
@@ -73,6 +73,7 @@ const prisma = new PrismaClient();
       _count: {
         origin: true,
         destination: true,
+        type: true,
       },
       orderBy: {
         _count: {
@@ -83,3 +84,7 @@ const prisma = new PrismaClient();
   
     return data
   }
+
+  
+
+  
