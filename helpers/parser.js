@@ -1,7 +1,7 @@
 import * as cheerio from 'cheerio';
 import chalk from 'chalk';
 import { getPageContent } from './puppeteer.js';
-import { copyArrayObjects, filterObjects } from './helpers.js';
+import { copyArrayObjects, filterObjects, delay } from './helpers.js';
 import { saveObjectsToDatabase } from './data_handler.js';
 
 export const finalarrays = [];
@@ -34,9 +34,9 @@ export async function parseBorts(bort) {
             });
           }
           const obj = copyArrayObjects(items);
+          await delay(2000);
         }
           const subarraySort = filterObjects(finalarrays);
-
 
         if (subarraySort.length === 0) {
           console.log(chalk.red('Array is empty'), subarraySort.length);

@@ -14,35 +14,43 @@ export async function saveObjectsToDatabase(objects) {
 
       const { ident, type, origin, destination, departure, estimatedArrivalTime, estimatedTimeEnroute} = object;
 
-      const existingObject = await prisma.borts.findUnique({ where: { ident } });
-
+      const existingObject = await prisma.borts.findFirst({
+        where: {
+          ident,
+          departure,
+        },
+      });
+  
+      // Если запись существует, выполняем обновление
       if (existingObject) {
         await prisma.borts.update({
-          where: { ident },
+          where: {
+            id: existingObject.id,
+          },
           data: {
             type,
             origin,
             destination,
-            departure,
             estimatedArrivalTime,
             estimatedTimeEnroute,
           },
         });
       } else {
+        // Если запись не существует, выполняем создание
         await prisma.borts.create({
           data: {
             ident,
+            departure,
             type,
             origin,
             destination,
-            departure,
             estimatedArrivalTime,
             estimatedTimeEnroute,
           },
         });
       }
     }
-
+    
     console.log(chalk.red('Created records'));
   } catch (error) {
     console.error(chalk.red(`Error save database: ${error.message}`));

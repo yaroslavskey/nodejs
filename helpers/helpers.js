@@ -48,6 +48,7 @@ export function filterObjects(arr) {
 export function parseDate(dateString) {
   const parsedDate = moment(dateString, 'ddd hh:mmA z');
   return parsedDate.format('YYYY-MM-DD HH:mm:ss.SSZZ');
+  
 };
 
 export function filterObjectsByCode(objects, arr) {
@@ -62,21 +63,14 @@ export function filterObjectsByCode(objects, arr) {
     return filteredObjects;
   }
 
+export function delay(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 export const arr = [
-  'C525',
-  'C525',
-  'C525',
-  'C500',
-  'C500',
-  'C501',
-  'C25M',
-  'C510',
-  'C500',
-  'EA50',
-  'EA50',
-  'HDJT',
-  'HDJT',
-  'E50P',
+  'C525', 'C525', 'C525', 'C500', 'C500', 'C501',
+  'C25M', 'C510', 'C500', 'EA50', 'EA50', 'HDJT',
+  'HDJT', 'E50P',
   'E50P',
   'SF50',
   'AT75',

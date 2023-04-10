@@ -16,6 +16,7 @@
     "date-fns": "^2.29.3",
     "fs": "^0.0.1-security",
     "moment": "^2.29.4",
+    "moment-timezone": "^0.5.43",
     "prettier": "^2.8.7",
     "puppeteer": "^19.7.5",
     "transliteration": "^2.3.5"
