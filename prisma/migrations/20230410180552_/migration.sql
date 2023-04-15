@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "Borts" ALTER COLUMN "departure" SET DATA TYPE TIMESTAMP(3),
+ALTER COLUMN "estimatedArrivalTime" SET DATA TYPE TIMESTAMP(3);

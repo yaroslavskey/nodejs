@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import chalk from 'chalk';
-import { parseDate } from './helpers.js';
+import { parseDate, addFieldToObject } from './helpers.js';
 
 const prisma = new PrismaClient();
 
@@ -9,21 +9,26 @@ export async function saveObjectsToDatabase(objects) {
     for (const object of objects) {
 
       object.ident = object.ident.substring(1);
-      object.departure = parseDate(object.departure);
-      object.estimatedArrivalTime = parseDate(object.estimatedArrivalTime);
+      object.departure = new Date(parseDate(object.departure));
+      object.estimatedArrivalTime = new Date(parseDate(object.estimatedArrivalTime));
+      const objectNew = addFieldToObject(object);
 
-      const { ident, type, origin, destination, departure, estimatedArrivalTime, estimatedTimeEnroute} = object;
+      const tenMinutesLater = new Date(Date.now() + 10 * 60 * 1000); // 10 минут в миллисекундах
 
-      const existingObject = await prisma.borts.findFirst({
+      const { ident, type, origin, destination, departure, estimatedArrivalTime, estimatedTimeEnroute, superType} = objectNew;
+      const existingObject = await prisma.bortsBase.findFirst({
         where: {
-          ident,
-          departure,
+          ident: ident,
+          departure: {
+            gte: departure,
+            lt: tenMinutesLater,
+          },
         },
       });
   
       // Если запись существует, выполняем обновление
       if (existingObject) {
-        await prisma.borts.update({
+        await prisma.bortsBase.update({
           where: {
             id: existingObject.id,
           },
@@ -33,19 +38,21 @@ export async function saveObjectsToDatabase(objects) {
             destination,
             estimatedArrivalTime,
             estimatedTimeEnroute,
+            superType,
           },
         });
       } else {
         // Если запись не существует, выполняем создание
-        await prisma.borts.create({
+        await prisma.bortsBase.create({
           data: {
             ident,
-            departure,
             type,
             origin,
             destination,
+            departure,
             estimatedArrivalTime,
             estimatedTimeEnroute,
+            superType,
           },
         });
       }

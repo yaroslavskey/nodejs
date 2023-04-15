@@ -27,7 +27,7 @@ import { parseBorts } from './helpers/parser.js';
   const subarray = await removeAircraftTypeWithKeywords(items);
 
   const filterObjectsArr = await filterObjectsByCode(subarray, arr);
-  console.log(filterObjectsArr)
+  //console.log(filterObjectsArr)
 
   console.log(chalk.bgRed(`Load bort list !!! All records ${subarray.length}`));
   const result = await parseBorts(filterObjectsArr);
